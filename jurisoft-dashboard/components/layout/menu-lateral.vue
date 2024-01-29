@@ -76,7 +76,7 @@
         <ul v-for="supItem in supportItems" :key="supItem.name">
           <li>
             <div class="icone">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="-5 -5 24 24" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path :d="supItem.pathD" :fill="fillpath"/>
               </svg>
             </div>
@@ -200,6 +200,7 @@ export default {
     return {
       menu: true,
       content: "Dashboard",
+      fillpath: "#525866",
       menuItems: [
         {
           name: "Dashboard",
@@ -266,7 +267,7 @@ export default {
         },
         {
           name: "Suporte",
-          pathD: "M8 2C6.4087 2 4.88258 2.63214 3.75736 3.75736C2.63214 4.88258 2 6.4087 2 8H4.25C4.64782 8 5.02936 8.15804 5.31066 8.43934C5.59196 8.72064 5.75 9.10218 5.75 9.5V13.25C5.75 13.6478 5.59196 14.0294 5.31066 14.3107C5.02936 14.592 4.64782 14.75 4.25 14.75H2C1.60218 14.75 1.22064 14.592 0.93934 14.3107C0.658035 14.0294 0.5 13.6478 0.5 13.25V8C0.5 3.85775 3.85775 0.5 8 0.5C12.1423 0.5 15.5 3.85775 15.5 8V13.25C15.5 13.6478 15.342 14.0294 15.0607 14.3107C14.7794 14.592 14.3978 14.75 14 14.75H11.75C11.3522 14.75 10.9706 14.592 10.6893 14.3107C10.408 14.0294 10.25 13.6478 10.25 13.25V9.5C10.25 9.10218 10.408 8.72064 10.6893 8.43934C10.9706 8.15804 11.3522 8 11.75 8H14C14 6.4087 13.3679 4.88258 12.2426 3.75736C11.1174 2.63214 9.5913 2 8 2ZM2 9.5V13.25H4.25V9.5H2ZM11.75 9.5V13.25H14V9.5H11.75Z"
+          pathD: "M10 4C8.4087 4 6.88258 4.63214 5.75736 5.75736C4.63214 6.88258 4 8.4087 4 10H6.25C6.64782 10 7.02936 10.158 7.31066 10.4393C7.59196 10.7206 7.75 11.1022 7.75 11.5V15.25C7.75 15.6478 7.59196 16.0294 7.31066 16.3107C7.02936 16.592 6.64782 16.75 6.25 16.75H4C3.60218 16.75 3.22064 16.592 2.93934 16.3107C2.65804 16.0294 2.5 15.6478 2.5 15.25V10C2.5 5.85775 5.85775 2.5 10 2.5C14.1423 2.5 17.5 5.85775 17.5 10V15.25C17.5 15.6478 17.342 16.0294 17.0607 16.3107C16.7794 16.592 16.3978 16.75 16 16.75H13.75C13.3522 16.75 12.9706 16.592 12.6893 16.3107C12.408 16.0294 12.25 15.6478 12.25 15.25V11.5C12.25 11.1022 12.408 10.7206 12.6893 10.4393C12.9706 10.158 13.3522 10 13.75 10H16C16 8.4087 15.3679 6.88258 14.2426 5.75736C13.1174 4.63214 11.5913 4 10 4ZM4 11.5V15.25H6.25V11.5H4ZM13.75 11.5V15.25H16V11.5H13.75Z"
         },
       ],
     };
@@ -284,6 +285,7 @@ export default {
     },
     estadoMenu() {
       this.menu = !this.menu;
+      this.$emit("estadoMenu", this.menu);
     }
   }
 };
@@ -314,11 +316,33 @@ export default {
       font-weight: 400;
       line-height: 16px; /* 133.333% */
     }
+    .imagem{
+      cursor: pointer;
+      transition: 0.5s;
+      &:hover{
+        transform: scale(1.1);
+        transition: 0.5s;
+      }
+    }
     .btn-estado{
       margin-left: auto;
+      &:hover{
+        cursor: pointer;
+        svg{
+          // sombra
+          filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.15));
+          transition: 0.2s;
+          path{
+            fill: $secondary;
+            transition: 0.5s;
+          }
+        }
+      }
       svg{
+        transition: 0.2s;
         path{
           fill: $text;
+          transition: 0.5s;
         }
       }
     }
@@ -369,6 +393,7 @@ export default {
     &.active{
       li{
         justify-content: unset;
+        font-weight: bold;
       }
     }
     li{
@@ -388,6 +413,7 @@ export default {
       border-radius: 10px;
       margin: 0 15px;
       position: relative;
+      transition: 0.5s;
       .icone{
         width: 20px;
         height: 20px;
@@ -401,6 +427,11 @@ export default {
             fill: $text;
           }
         }
+      }
+      &:hover{
+        background-color: $contrast-white;
+        transform: scale(1.05);
+        transition: 0.5s;
       }
       &.active{
         color: $black;
@@ -433,8 +464,16 @@ export default {
     li {
       display: flex;
       margin-top: 20px;
+      padding: 5px;
+      border-radius: 10px;
+      transition: 0.5s;
       &:first-child{
         margin-top: 0;
+      }
+      &:hover{
+        background-color: $contrast-white;
+        transform: scale(1.05);
+        transition: 0.5s;
       }
       .texto{
         display: flex;
@@ -472,9 +511,15 @@ export default {
       li{
         justify-content: flex-start;
       }
-      svg{
-        path{
-          fill: $text;
+      .icone{
+        width: 20px;
+        height: 20px;
+        svg{
+          width: 20px;
+          height: 20px;
+          path{
+            fill: $text;
+          }
         }
       }
     }

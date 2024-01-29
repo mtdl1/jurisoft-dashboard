@@ -16,7 +16,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "apexcharts": "^3.45.2",
     "sass": "^1.70.0",
-    "unhead": "^1.8.10"
+    "unhead": "^1.8.10",
+    "vue3-apexcharts": "^1.4.4"
   }
 }
