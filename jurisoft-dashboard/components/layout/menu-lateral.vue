@@ -16,7 +16,7 @@
         </svg>
       </div>
       <div class="texto" v-show="menu">
-        <p class="empresa">JuriSoft</p>
+        <p class="empresa">Dashboard</p>
         <p class="setor">Marketing Jurídico</p>
       </div>
       <div class="btn-estado" @click="estadoMenu" v-if="menu">
