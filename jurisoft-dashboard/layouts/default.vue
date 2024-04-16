@@ -48,7 +48,7 @@ export default {
       content: "Dashboard",
       user: {
         name: "Sophia Williams",
-        email: "sophia@jurisoft.com"
+        email: "sophia@mail.com"
       },
       estadomenu: true,
     };
